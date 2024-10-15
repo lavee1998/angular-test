@@ -1,0 +1,11 @@
+It's a {{ selectedWordLetters.length }} letter word
+<div class="flex flex-wrap gap-2 my-5">
+  <div
+    class="border-2 border-black border-solid px-3 py-1 w-11 h-11 mi text-center"
+    *ngFor="let letter of selectedWordLetters"
+  >
+    <h2 *ngIf="guessedLetters.includes(letter)">
+      {{ letter.toUpperCase() }}
+    </h2>
+  </div>
+</div>

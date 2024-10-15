@@ -1,0 +1,12 @@
+<div class="mb-3">Play with a word!</div>
+<div class="flex flex-row gap-4 flex-wrap w-full">
+  <app-button
+    variant="secondary"
+    [small]="true"
+    classNames="min-m-64"
+    (click)="handleSelectLetter(letter)"
+    [disabled]="guessedLetters.includes(letter)"
+    *ngFor="let letter of letters"
+    >{{ letter.toUpperCase() }}</app-button
+  >
+</div>

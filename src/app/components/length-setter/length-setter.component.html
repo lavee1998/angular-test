@@ -1,0 +1,26 @@
+<div class="text-center">
+  <h1 class="mb-4">The Hangman</h1>
+  <div>Let's play Hangman! How many letters do you want in your word?</div>
+  <div class="flex mx-auto my-4 gap-4 flex-wrap max-w-40 place-content-between">
+    @for (item of wordLengths; track item; let idx = $index) {
+    <app-button
+      (click)="handleSelectLength(item)"
+      [selectable]="true"
+      [small]="true"
+      variant="secondary"
+      >{{ item }}
+    </app-button>
+    }
+    <app-button
+      (click)="handleSelectLength()"
+      [selectable]="true"
+      variant="secondary"
+      >Random</app-button
+    >
+  </div>
+  <div class="mt-6">
+    <app-button (click)="handleStartGame()" variant="primary"
+      >Let's play</app-button
+    >
+  </div>
+</div>

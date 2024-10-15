@@ -1,1 +1,25 @@
 /* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  h1 {
+    @apply text-4xl;
+    @apply font-bold;
+    @apply tracking-wide;
+    @apply mb-1;
+  }
+  h2 {
+    @apply text-xl;
+    @apply font-bold;
+    @apply tracking-wide;
+    @apply mb-1;
+  }
+
+  h3 {
+    @apply text-lg;
+    @apply font-bold;
+    @apply tracking-wide;
+  }
+}
