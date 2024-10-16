@@ -15,5 +15,5 @@ export class SelectedWordComponent {
   readonly guessedLetters = computed(() =>
     Array.from(this.gameService.guessedLetters())
   );
-  public readonly letters = this.gameService.letters;
+  readonly letters = this.gameService.letters;
 }

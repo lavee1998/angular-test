@@ -35,10 +35,10 @@ export class GameComponent {
       this.gameService.words()
     )
   );
-  public readonly words = this.gameService.words;
-  public readonly letters = this.gameService.letters;
-  public readonly won = this.gameService.won;
-  public readonly lost = this.gameService.lost;
+  readonly words = this.gameService.words;
+  readonly letters = this.gameService.letters;
+  readonly won = this.gameService.won;
+  readonly lost = this.gameService.lost;
 
   computeIsGameOn(
     isGameOn: boolean,

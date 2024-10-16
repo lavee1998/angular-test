@@ -10,5 +10,5 @@ import { GameService } from '../../services/game/game.service';
 export class DrawerComponent {
   full = input<boolean>(false);
   private gameService = inject(GameService);
-  public readonly wrongTips = this.gameService.wrongTips;
+  readonly wrongTips = this.gameService.wrongTips;
 }
