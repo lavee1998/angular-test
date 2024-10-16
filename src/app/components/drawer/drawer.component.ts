@@ -1,22 +1,16 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { Component, computed, input } from '@angular/core';
+import { GameService } from '../../services/game/game.service';
 
-import { HangTreeComponent } from './drawer.component.';
+@Component({
+  selector: 'app-drawer',
+  standalone: true,
+  templateUrl: './drawer.component.html',
+  styleUrl: './drawer.component.css',
+})
+export class DrawerComponent {
+  wrongTips = computed(() => this.gameService.wrongTips());
 
-describe('HangTreeComponent', () => {
-  let component: HangTreeComponent;
-  let fixture: ComponentFixture<HangTreeComponent>;
+  full = input<boolean>(false);
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [HangTreeComponent],
-    }).compileComponents();
-
-    fixture = TestBed.createComponent(HangTreeComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+  constructor(private gameService: GameService) {}
+}

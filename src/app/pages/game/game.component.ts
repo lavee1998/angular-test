@@ -1,6 +1,6 @@
 import { Component, HostListener } from '@angular/core';
 import { KeyboardComponent } from '../../components/keyboard/keyboard.component';
-import { DrawerComponent } from '../../components/drawer/drawer.component.';
+import { DrawerComponent } from '../../components/drawer/drawer.component';
 import { ButtonComponent } from '../../components/Button/button.component';
 import { SelectedWordComponent } from '../../components/selected-word/selected-word.component';
 import { WinComponent } from '../../components/win/win.component';
