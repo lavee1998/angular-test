@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { map } from 'rxjs/internal/operators/map';
 
@@ -9,8 +9,7 @@ import { map } from 'rxjs/internal/operators/map';
 export class ApiService {
   private readonly wordsPath = 'assets/words.txt';
   private readonly lettersPath = 'assets/letters.txt';
-
-  constructor(private http: HttpClient) {}
+  private readonly http = inject(HttpClient);
 
   getLetters(): Observable<string[]> {
     return this.http.get(this.lettersPath, { responseType: 'text' }).pipe(

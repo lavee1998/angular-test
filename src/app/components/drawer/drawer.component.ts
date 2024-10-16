@@ -1,4 +1,4 @@
-import { Component, computed, input } from '@angular/core';
+import { Component, inject, input } from '@angular/core';
 import { GameService } from '../../services/game/game.service';
 
 @Component({
@@ -8,9 +8,7 @@ import { GameService } from '../../services/game/game.service';
   styleUrl: './drawer.component.css',
 })
 export class DrawerComponent {
-  wrongTips = computed(() => this.gameService.wrongTips());
-
   full = input<boolean>(false);
-
-  constructor(private gameService: GameService) {}
+  private gameService = inject(GameService);
+  public readonly wrongTips = this.gameService.wrongTips;
 }

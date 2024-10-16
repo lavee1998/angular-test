@@ -2,8 +2,7 @@ import { Component } from '@angular/core';
 import { DrawerComponent } from '../../components/drawer/drawer.component';
 import { ButtonComponent } from '../../components/Button/button.component';
 import { RouterLink } from '@angular/router';
-import { AppConfigService } from '../../services/app-config/app-config.service';
-import { GameService } from '../../services/game/game.service';
+import { RouteSegments } from '../../app.routes';
 
 @Component({
   selector: 'app-landing-page',
@@ -13,6 +12,5 @@ import { GameService } from '../../services/game/game.service';
   styleUrl: './landing-page.component.css',
 })
 export class LandingPageComponent {
-  constructor(private appConfigService: AppConfigService) {}
-  readonly startPageRoute = this.appConfigService.paths.start;
+  readonly startPageRoute = RouteSegments.StartGame;
 }

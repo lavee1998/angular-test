@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { ButtonComponent } from '../Button/button.component';
 import { GameService } from '../../services/game/game.service';
 
@@ -10,23 +10,24 @@ import { GameService } from '../../services/game/game.service';
   styleUrl: './length-setter.component.css',
 })
 export class LengthSetterComponent {
-  constructor(private gameService: GameService) {}
-  selectedLength?: number;
+  private readonly gameService = inject(GameService);
+  readonly selectedLength = signal<number | undefined>(undefined);
+  readonly wordLengths = computed(
+    () =>
+      new Set(
+        this.gameService
+          .words()
+          .map((word) => word.length)
+          .sort((a, b) => a - b)
+          .filter((i) => !!i)
+      )
+  );
 
   handleSelectLength(value?: number) {
-    this.selectedLength = value;
+    this.selectedLength.set(value);
   }
 
   handleStartGame() {
-    this.gameService.startNewGame(this.selectedLength);
-  }
-
-  get wordLengths() {
-    return new Set(
-      this.gameService.words
-        .map((word) => word.length)
-        .sort((a, b) => a - b)
-        .filter((i) => !!i)
-    );
+    this.gameService.startNewGame(this.selectedLength());
   }
 }

@@ -1,23 +1,25 @@
+@let _full = full(); @let _wrongTips = wrongTips();
+
 <svg viewBox="0 0 10 12">
-  @if (full() || wrongTips() > 0) { 
+  @if (_full || _wrongTips > 0) { 
   <path d="M1,11 h8" />
-  } @if(full() || wrongTips() > 1 ){
+  } @if(_full || _wrongTips > 1 ){
   <path d="M9,11 v-10" />
-  } @if(full() || wrongTips() > 2) {
+  } @if(_full || _wrongTips > 2) {
   <path d="M9,1 h-4" />
-  } @if(full() || wrongTips() > 3) {
+  } @if(_full || _wrongTips > 3) {
   <path d="M5,1 v2" />
-  } @if(full() || wrongTips() > 4) {
+  } @if(_full || _wrongTips > 4) {
   <circle cx="5" cy="4" r="1" />
-  } @if(full() || wrongTips() > 5) {
+  } @if(_full || _wrongTips > 5) {
   <path d="M5,5 v3" />
-  } @if(full() || wrongTips() > 6) { 
+  } @if(_full || _wrongTips > 6) { 
   <path d="M5,5 l-2,2" />
-  } @if(full() || wrongTips() > 7) {
+  } @if(_full || _wrongTips > 7) {
   <path d="M5,5 l2,2" />
-  } @if(full() || wrongTips() > 8) {
+  } @if(_full || _wrongTips > 8) {
   <path d="M5,8 l-2,2" />
-  } @if(full() || wrongTips() > 9) {
+  } @if(_full || _wrongTips > 9) {
   <path d="M5,8 l2,2" />
   }
 </svg>

@@ -1,4 +1,4 @@
-import { Component, input, output } from '@angular/core';
+import { Component, inject, input, output } from '@angular/core';
 import { CardComponent } from '../card/card.component';
 import { ButtonComponent } from '../Button/button.component';
 import { GameService } from '../../services/game/game.service';
@@ -11,12 +11,10 @@ import { GameService } from '../../services/game/game.service';
   styleUrl: './keyboard.component.css',
 })
 export class KeyboardComponent {
-  selectLetter = output<string>();
-  full = input<boolean>(false);
-
-  get letters() {
-    return this.gameService.letters;
-  }
+  readonly selectLetter = output<string>();
+  readonly full = input<boolean>(false);
+  private readonly gameService = inject(GameService);
+  readonly letters = this.gameService.letters;
 
   disabled(letter: string) {
     return (
@@ -26,8 +24,6 @@ export class KeyboardComponent {
       Array.from(this.gameService.guessedLetters()).includes(letter)
     );
   }
-
-  constructor(private gameService: GameService) {}
 
   handleSelectLetter(value: string) {
     this.selectLetter.emit(value);

@@ -1,4 +1,5 @@
-@if (isGameOn) {
+@let _isGameOn = isGameOn(); @let _won = won(); @let _lost = lost(); @if
+(_isGameOn) {
 
 <div>
   <a routerLink="/" class="flex justify-end gap-4 items-center">
@@ -23,7 +24,7 @@
     <div class="p-4">
       <h1 class="h1">The Hangman</h1>
 
-      @if (won) { <app-win />} @else if (lost) {<app-lose /> }
+      @if (_won) { <app-win />} @else if (_lost) {<app-lose /> }
 
       <app-selected-word />
       <app-keyboard

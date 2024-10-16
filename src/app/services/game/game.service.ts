@@ -1,43 +1,41 @@
-import {
-  computed,
-  Injectable,
-  Signal,
-  signal,
-  WritableSignal,
-  effect,
-} from '@angular/core';
+import { computed, Injectable, signal, effect, inject } from '@angular/core';
 import { LocalStorageService } from '../local-storage/local-storage.service';
 import { Router } from '@angular/router';
-import { AppConfigService } from '../app-config/app-config.service';
 import { ApiService } from '../api/api.service';
+import { RouteSegments } from '../../app.routes';
 
 @Injectable({
   providedIn: 'root',
 })
 export class GameService {
-  selectedWord: WritableSignal<string> = signal('');
-  guessedLetters: WritableSignal<Set<string>> = signal(new Set<string>([]));
-  wrongTips: Signal<number> = computed(() => this.calculateWrongTips());
-  isGameOn = signal(false);
-  length = signal<undefined | number>(undefined);
-  lost: Signal<boolean> = computed(() => this.wrongTips() >= this.maxWrongTips);
-  won: Signal<boolean> = computed(() => this.calculateWon());
-  letters: string[] = [];
-  words: string[] = [];
+  readonly selectedWord = signal<string>('');
+  readonly guessedLetters = signal<Set<string>>(new Set<string>([]));
+  readonly wrongTips = computed<number>(() =>
+    this.calculateWrongTips(this.selectedWord(), this.guessedLetters())
+  );
+  readonly isGameOn = signal(false);
+  readonly length = signal<undefined | number>(undefined);
+  readonly lost = computed<boolean>(
+    () => this.wrongTips() >= this.maxWrongTips
+  );
+  readonly won = computed<boolean>(() =>
+    this.calculateWon(this.selectedWord(), this.guessedLetters())
+  );
+  readonly letters = signal<string[]>([]);
+  readonly words = signal<string[]>([]);
   readonly maxWrongTips: number = 10;
 
-  constructor(
-    private localStorageService: LocalStorageService,
-    private routerService: Router,
-    private apiService: ApiService,
-    private appConfigService: AppConfigService
-  ) {
+  private readonly localStorageService = inject(LocalStorageService);
+  private readonly routerService = inject(Router);
+  private readonly apiService = inject(ApiService);
+
+  constructor() {
     this.apiService.getLetters().subscribe((letterArray) => {
-      this.letters = letterArray;
+      this.letters.set(letterArray);
     });
 
     this.apiService.getWords().subscribe((wordArray) => {
-      this.words = wordArray;
+      this.words.set(wordArray);
     });
 
     this.setDefaultValuesFromLocaleStore();
@@ -72,25 +70,22 @@ export class GameService {
     });
   }
 
-  calculateWrongTips() {
-    return Array.from(this.guessedLetters()).reduce((prev, curr) => {
-      if (!this.selectedWord().includes(curr)) return prev + 1;
+  calculateWrongTips(selectedWord: string, guessedLetters: Set<string>) {
+    return Array.from(guessedLetters).reduce((prev, curr) => {
+      if (!selectedWord.includes(curr)) return prev + 1;
 
       return prev;
     }, 0);
   }
 
-  calculateWon() {
-    if (!this.selectedWord?.()) return false;
+  calculateWon(selectedWord: string, guessedLetters: Set<string>) {
+    const _guessedLetters = Array.from(guessedLetters);
+    if (!selectedWord) return false;
 
-    const _guessedLetters = Array.from(this.guessedLetters());
-
-    const wordIsGuessed = this.selectedWord()
-      .split('')
-      .reduce((prev, curr) => {
-        if (!prev) return false;
-        return prev && _guessedLetters.includes(curr);
-      }, true);
+    const wordIsGuessed = selectedWord.split('').reduce((prev, curr) => {
+      if (!prev) return false;
+      return prev && _guessedLetters.includes(curr);
+    }, true);
 
     return wordIsGuessed && !this.lost();
   }
@@ -131,7 +126,7 @@ export class GameService {
   }
 
   selectLetter(value: string) {
-    if (this.won() || this.lost() || !this.letters.includes(value)) return;
+    if (this.won() || this.lost() || !this.letters().includes(value)) return;
 
     this.guessedLetters.update(
       (letters) => new Set([...Array.from(letters), value])
@@ -141,8 +136,8 @@ export class GameService {
   chooseSelectedWord() {
     const filteredWords =
       this.length() != undefined
-        ? this.words.filter((word) => word.length === this.length())
-        : this.words;
+        ? this.words().filter((word) => word.length === this.length())
+        : this.words();
     let shuffledArray = filteredWords.sort(() => 0.5 - Math.random());
     this.selectedWord.set(shuffledArray[0] || '');
   }
@@ -152,6 +147,6 @@ export class GameService {
     this.isGameOn.set(false);
     this.selectedWord.set('');
     this.guessedLetters.set(new Set([]));
-    this.routerService.navigate([this.appConfigService.paths.start]);
+    this.routerService.navigate([RouteSegments.StartGame]);
   }
 }

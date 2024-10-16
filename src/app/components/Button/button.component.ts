@@ -1,22 +1,18 @@
-import { Component, Input, input, output } from '@angular/core';
-import clsx from 'clsx';
+import { NgClass } from '@angular/common';
+import { Component, input, output } from '@angular/core';
 
 @Component({
   selector: 'app-button',
   standalone: true,
-  imports: [],
+  imports: [NgClass],
   templateUrl: './button.component.html',
   styleUrl: './button.component.css',
 })
-
-// export type ButtonVariant = 'primary' | 'secondary';
 export class ButtonComponent {
   click = output<MouseEvent>();
   selectable = input<boolean>(false);
   disabled = input<boolean>(false);
   small = input<boolean>(false);
-  classNames = input<string>('');
-  clsx = clsx;
   variant = input<'primary' | 'secondary'>('primary'); // InputSignal<string|undefined>
 
   handleClick(event: MouseEvent) {

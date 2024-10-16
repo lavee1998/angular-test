@@ -1,10 +1,10 @@
-It's a {{ selectedWordLetters.length }} letter word
+It's a {{ selectedWordLetters().length }} letter word
 <div class="flex flex-wrap gap-2 my-5">
-  @for (letter of selectedWordLetters; track $index) {
+  @for (letter of selectedWordLetters(); track $index) {
   <div
     class="border-2 border-black border-solid px-3 py-1 w-11 h-11 mi text-center"
   >
-    @if (guessedLetters.includes(letter)) {
+    @if (guessedLetters().includes(letter)) {
     <h2>
       {{ letter.toUpperCase() }}
     </h2>

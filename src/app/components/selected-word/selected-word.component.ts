@@ -1,4 +1,4 @@
-import { Component, computed, input } from '@angular/core';
+import { Component, computed, inject, input } from '@angular/core';
 import { GameService } from '../../services/game/game.service';
 
 @Component({
@@ -8,17 +8,12 @@ import { GameService } from '../../services/game/game.service';
   styleUrl: './selected-word.component.css',
 })
 export class SelectedWordComponent {
-  constructor(private gameService: GameService) {}
-
-  get selectedWordLetters() {
-    return this.gameService.selectedWord().split('');
-  }
-
-  get guessedLetters() {
-    return Array.from(this.gameService.guessedLetters());
-  }
-
-  get letters() {
-    return this.gameService.letters;
-  }
+  private readonly gameService = inject(GameService);
+  readonly selectedWordLetters = computed(() =>
+    this.gameService.selectedWord().split('')
+  );
+  readonly guessedLetters = computed(() =>
+    Array.from(this.gameService.guessedLetters())
+  );
+  public readonly letters = this.gameService.letters;
 }

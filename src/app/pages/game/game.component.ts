@@ -1,4 +1,4 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, computed, HostListener, inject } from '@angular/core';
 import { KeyboardComponent } from '../../components/keyboard/keyboard.component';
 import { DrawerComponent } from '../../components/drawer/drawer.component';
 import { ButtonComponent } from '../../components/Button/button.component';
@@ -26,32 +26,28 @@ import { LengthSetterComponent } from '../../components/length-setter/length-set
   styleUrl: './game.component.css',
 })
 export class GameComponent {
-  get isGameOn() {
-    return (
-      !!this.gameService.isGameOn() &&
-      !!this.gameService.selectedWord() &&
-      !!this.letters.length &&
-      !!this.words.length
-    );
-  }
+  private readonly gameService = inject(GameService);
+  readonly isGameOn = computed(() =>
+    this.computeIsGameOn(
+      this.gameService.isGameOn(),
+      this.gameService.selectedWord(),
+      this.gameService.letters(),
+      this.gameService.words()
+    )
+  );
+  public readonly words = this.gameService.words;
+  public readonly letters = this.gameService.letters;
+  public readonly won = this.gameService.won;
+  public readonly lost = this.gameService.lost;
 
-  get words() {
-    return this.gameService.words;
+  computeIsGameOn(
+    isGameOn: boolean,
+    selectedWord: string,
+    letters: string[],
+    words: string[]
+  ) {
+    return !!isGameOn && !!selectedWord && !!letters.length && !!words.length;
   }
-
-  get letters() {
-    return this.gameService.letters;
-  }
-
-  get won() {
-    return this.gameService.won();
-  }
-
-  get lost() {
-    return this.gameService.lost();
-  }
-
-  constructor(private gameService: GameService) {}
 
   handleClickEndGameButton() {
     this.gameService.endGame();
