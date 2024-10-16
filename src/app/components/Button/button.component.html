@@ -4,7 +4,7 @@ selectable();
 <button
   [disabled]="disabled()"
   (click)="handleClick($event)"
-  class="uppercase text-xs font-bold disabled:bg-slate-50 disabled:text-slate-300 disabled:border-slate-200 disabled:shadow-none rounded shadow px-4 py-2"
+  class="uppercase text-xs font-bold disabled:bg-slate-50 disabled:text-slate-300 disabled:border-slate-200 disabled:shadow-none shadow-md shadow-slate-400 px-4 py-2"
   [ngClass]="{
     'bg-primary': _variant === 'primary',
     'bg-secondary': _variant === 'secondary',

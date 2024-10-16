@@ -12,12 +12,6 @@ module.exports = {
         secondary: "#f8fafc",
       },
     },
-    // colors: {
-    //   success: "#00FF00",
-    //   error: "#FF0000",
-    //   primary: "#020617",
-    //   secondary: "#f8fafc",
-    // },
   },
   plugins: [],
 };

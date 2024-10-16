@@ -14,12 +14,16 @@
     @apply text-xl;
     @apply font-bold;
     @apply tracking-wide;
-    @apply mb-1;
   }
 
   h3 {
     @apply text-lg;
     @apply font-bold;
     @apply tracking-wide;
+  }
+
+  caption {
+    @apply text-sm;
+    display: inline-block;
   }
 }

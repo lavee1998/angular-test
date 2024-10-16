@@ -39,6 +39,7 @@ export class GameComponent {
   readonly letters = this.gameService.letters;
   readonly won = this.gameService.won;
   readonly lost = this.gameService.lost;
+  readonly wrongTips = this.gameService.wrongTips;
 
   computeIsGameOn(
     isGameOn: boolean,

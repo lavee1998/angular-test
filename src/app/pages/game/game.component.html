@@ -18,11 +18,17 @@
     </svg>
   </a>
   <div class="gap-4 md:flex block">
-    <div class="min-w-32 max-w-64 m-auto">
+    <div class="min-w-32 max-w-64 mx-auto">
+      <caption class="w-full">
+        Number of errors:
+        {{
+          wrongTips()
+        }}
+      </caption>
       <app-drawer [full]="false"></app-drawer>
     </div>
-    <div class="p-4">
-      <h1 class="h1">The Hangman</h1>
+    <div class="p-4 md:px-12">
+      <h1 class="mb-6">The Hangman</h1>
 
       @if (_won) { <app-win />} @else if (_lost) {<app-lose /> }
 
@@ -30,7 +36,7 @@
       <app-keyboard
         (selectLetter)="handleLetterSelection($event)"
       ></app-keyboard>
-      <div class="flex justify-end gap-4 py-4">
+      <div class="flex justify-end gap-4 mt-12">
         <app-button (click)="handleClickEndGameButton()" variant="secondary"
           >end game</app-button
         >
