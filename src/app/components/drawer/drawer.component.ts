@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { HangTreeComponent } from './hang-tree.component';
+import { HangTreeComponent } from './drawer.component.';
 
 describe('HangTreeComponent', () => {
   let component: HangTreeComponent;
@@ -8,9 +8,8 @@ describe('HangTreeComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HangTreeComponent]
-    })
-    .compileComponents();
+      imports: [HangTreeComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(HangTreeComponent);
     component = fixture.componentInstance;

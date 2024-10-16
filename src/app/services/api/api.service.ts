@@ -1,25 +1,16 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { Observable } from 'rxjs/internal/Observable';
+import { map } from 'rxjs/internal/operators/map';
 
 @Injectable({
   providedIn: 'root',
 })
-export class FileService {
+export class ApiService {
   private readonly wordsPath = 'assets/words.txt';
   private readonly lettersPath = 'assets/letters.txt';
-  letters: string[] = [];
-  words: string[] = [];
 
-  constructor(private http: HttpClient) {
-    this.getLetters().subscribe((letterArray) => {
-      this.letters = letterArray;
-    });
-
-    this.getWords().subscribe((wordArray) => {
-      this.words = wordArray;
-    });
-  }
+  constructor(private http: HttpClient) {}
 
   getLetters(): Observable<string[]> {
     return this.http.get(this.lettersPath, { responseType: 'text' }).pipe(
@@ -29,7 +20,6 @@ export class FileService {
     );
   }
 
-  // Method to fetch the text file and convert its contents into an array of words
   getWords(): Observable<string[]> {
     return this.http.get(this.wordsPath, { responseType: 'text' }).pipe(
       map((data: string) => {

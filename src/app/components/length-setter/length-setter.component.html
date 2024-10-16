@@ -1,7 +1,7 @@
 <div class="text-center">
   <h1 class="mb-4">The Hangman</h1>
   <div>Let's play Hangman! How many letters do you want in your word?</div>
-  <div class="flex mx-auto my-4 gap-4 flex-wrap max-w-40 place-content-between">
+  <div class="flex mx-auto my-4 gap-4 flex-wrap max-w-44 place-content-between">
     @for (item of wordLengths; track item; let idx = $index) {
     <app-button
       (click)="handleSelectLength(item)"

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ButtonComponent } from '../Button/button.component';
-import { GameService } from '../../services/game.service';
+import { GameService } from '../../services/game/game.service';
 import { FileService } from '../../services/file.service';
 
 @Component({
@@ -22,7 +22,7 @@ export class LengthSetterComponent {
   }
 
   handleStartGame() {
-    this.gameService.startGame(this.selectedLength);
+    this.gameService.startNewGame(this.selectedLength);
   }
 
   get wordLengths() {

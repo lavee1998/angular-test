@@ -5,6 +5,6 @@ import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.com
 
 export const routes: Routes = [
   { path: '', component: LandingPageComponent },
-  { path: 'game', component: GameComponent },
+  { path: 'start', component: GameComponent },
   { path: '**', component: PageNotFoundComponent }, // Wildcard route for a 404 page
 ];

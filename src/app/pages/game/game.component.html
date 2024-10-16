@@ -23,16 +23,15 @@
     <div class="p-4">
       <h1 class="h1">The Hangman</h1>
 
-      <app-win *ngIf="won" />
-      <app-lose *ngIf="lost()" />
+      @if (won) { <app-win />} @else if (lost) {<app-lose /> }
 
       <app-selected-word />
       <app-letters (selectLetter)="handleLetterSelection($event)"></app-letters>
       <div class="flex justify-end gap-4 py-4">
-        <app-button (click)="(handleClickEndGameButton)" variant="secondary"
+        <app-button (click)="handleClickEndGameButton()" variant="secondary"
           >end game</app-button
         >
-        <app-button (click)="(handleClickStartNewGameButton)" variant="primary"
+        <app-button (click)="handleClickStartNewGameButton()" variant="primary"
           >start new game</app-button
         >
       </div>
