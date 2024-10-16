@@ -1,7 +1,6 @@
 import { Component, HostListener } from '@angular/core';
-import { FileService } from '../../services/file.service';
-import { LettersComponent } from '../../components/keyboard/keyboard.component';
-import { HangTreeComponent } from '../../components/drawer/drawer.component.';
+import { KeyboardComponent } from '../../components/keyboard/keyboard.component';
+import { DrawerComponent } from '../../components/drawer/drawer.component.';
 import { ButtonComponent } from '../../components/Button/button.component';
 import { SelectedWordComponent } from '../../components/selected-word/selected-word.component';
 import { WinComponent } from '../../components/win/win.component';
@@ -14,8 +13,8 @@ import { LengthSetterComponent } from '../../components/length-setter/length-set
   selector: 'app-game',
   standalone: true,
   imports: [
-    LettersComponent,
-    HangTreeComponent,
+    KeyboardComponent,
+    DrawerComponent,
     RouterLink,
     ButtonComponent,
     SelectedWordComponent,
@@ -37,11 +36,11 @@ export class GameComponent {
   }
 
   get words() {
-    return this.textFileService.words;
+    return this.gameService.words;
   }
 
   get letters() {
-    return this.textFileService.letters;
+    return this.gameService.letters;
   }
 
   get won() {
@@ -52,10 +51,7 @@ export class GameComponent {
     return this.gameService.lost();
   }
 
-  constructor(
-    private textFileService: FileService,
-    private gameService: GameService
-  ) {}
+  constructor(private gameService: GameService) {}
 
   handleClickEndGameButton() {
     this.gameService.endGame();

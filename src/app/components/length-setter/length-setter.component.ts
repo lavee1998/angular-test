@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { ButtonComponent } from '../Button/button.component';
 import { GameService } from '../../services/game/game.service';
-import { FileService } from '../../services/file.service';
 
 @Component({
   selector: 'app-length-setter',
@@ -11,10 +10,7 @@ import { FileService } from '../../services/file.service';
   styleUrl: './length-setter.component.css',
 })
 export class LengthSetterComponent {
-  constructor(
-    private gameService: GameService,
-    private fileService: FileService
-  ) {}
+  constructor(private gameService: GameService) {}
   selectedLength?: number;
 
   handleSelectLength(value?: number) {
@@ -27,7 +23,7 @@ export class LengthSetterComponent {
 
   get wordLengths() {
     return new Set(
-      this.fileService.words
+      this.gameService.words
         .map((word) => word.length)
         .sort((a, b) => a - b)
         .filter((i) => !!i)

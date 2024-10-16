@@ -2,12 +2,12 @@ import { Component, computed, input } from '@angular/core';
 import { GameService } from '../../services/game/game.service';
 
 @Component({
-  selector: 'app-hang-tree',
+  selector: 'app-drawer',
   standalone: true,
   templateUrl: './drawer.component.html',
   styleUrl: './drawer.component.css',
 })
-export class HangTreeComponent {
+export class DrawerComponent {
   wrongTips = computed(() => this.gameService.wrongTips());
 
   full = input<boolean>(false);

@@ -1,6 +1,6 @@
 @if (isGameOn) {
 
-<div class="">
+<div>
   <a routerLink="/" class="flex justify-end gap-4 items-center">
     <div>Instructions</div>
     <svg
@@ -16,9 +16,9 @@
       />
     </svg>
   </a>
-  <div class="flex gap-4">
-    <div class="min-w-32">
-      <app-hang-tree [full]="false"></app-hang-tree>
+  <div class="gap-4 md:flex block">
+    <div class="min-w-32 max-w-64 m-auto">
+      <app-drawer [full]="false"></app-drawer>
     </div>
     <div class="p-4">
       <h1 class="h1">The Hangman</h1>
@@ -26,7 +26,9 @@
       @if (won) { <app-win />} @else if (lost) {<app-lose /> }
 
       <app-selected-word />
-      <app-letters (selectLetter)="handleLetterSelection($event)"></app-letters>
+      <app-keyboard
+        (selectLetter)="handleLetterSelection($event)"
+      ></app-keyboard>
       <div class="flex justify-end gap-4 py-4">
         <app-button (click)="handleClickEndGameButton()" variant="secondary"
           >end game</app-button

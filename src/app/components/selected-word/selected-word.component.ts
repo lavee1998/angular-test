@@ -1,6 +1,5 @@
 import { Component, computed, input } from '@angular/core';
 import { GameService } from '../../services/game/game.service';
-import { FileService } from '../../services/file.service';
 
 @Component({
   selector: 'app-selected-word',
@@ -9,10 +8,7 @@ import { FileService } from '../../services/file.service';
   styleUrl: './selected-word.component.css',
 })
 export class SelectedWordComponent {
-  constructor(
-    private gameService: GameService,
-    private fileService: FileService
-  ) {}
+  constructor(private gameService: GameService) {}
 
   get selectedWordLetters() {
     return this.gameService.selectedWord().split('');
@@ -23,6 +19,6 @@ export class SelectedWordComponent {
   }
 
   get letters() {
-    return this.fileService.letters;
+    return this.gameService.letters;
   }
 }

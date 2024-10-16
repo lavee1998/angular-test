@@ -8,7 +8,6 @@ import {
 } from '@angular/core';
 import { LocalStorageService } from '../local-storage/local-storage.service';
 import { Router } from '@angular/router';
-import { FileService } from '../file.service';
 import { AppConfigService } from '../app-config/app-config.service';
 import { ApiService } from '../api/api.service';
 
@@ -29,7 +28,6 @@ export class GameService {
 
   constructor(
     private localStorageService: LocalStorageService,
-    private fileService: FileService,
     private routerService: Router,
     private apiService: ApiService,
     private appConfigService: AppConfigService
@@ -133,8 +131,7 @@ export class GameService {
   }
 
   selectLetter(value: string) {
-    if (this.won() || this.lost() || !this.fileService.letters.includes(value))
-      return;
+    if (this.won() || this.lost() || !this.letters.includes(value)) return;
 
     this.guessedLetters.update(
       (letters) => new Set([...Array.from(letters), value])
@@ -144,8 +141,8 @@ export class GameService {
   chooseSelectedWord() {
     const filteredWords =
       this.length() != undefined
-        ? this.fileService.words.filter((word) => word.length === this.length())
-        : this.fileService.words;
+        ? this.words.filter((word) => word.length === this.length())
+        : this.words;
     let shuffledArray = filteredWords.sort(() => 0.5 - Math.random());
     this.selectedWord.set(shuffledArray[0] || '');
   }

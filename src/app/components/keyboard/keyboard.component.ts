@@ -2,21 +2,20 @@ import { Component, input, output } from '@angular/core';
 import { CardComponent } from '../card/card.component';
 import { ButtonComponent } from '../Button/button.component';
 import { GameService } from '../../services/game/game.service';
-import { FileService } from '../../services/file.service';
 
 @Component({
-  selector: 'app-letters',
+  selector: 'app-keyboard',
   standalone: true,
   imports: [CardComponent, ButtonComponent, ButtonComponent],
   templateUrl: './keyboard.component.html',
   styleUrl: './keyboard.component.css',
 })
-export class LettersComponent {
+export class KeyboardComponent {
   selectLetter = output<string>();
   full = input<boolean>(false);
 
   get letters() {
-    return this.fileService.letters;
+    return this.gameService.letters;
   }
 
   disabled(letter: string) {
@@ -28,10 +27,7 @@ export class LettersComponent {
     );
   }
 
-  constructor(
-    private gameService: GameService,
-    private fileService: FileService
-  ) {}
+  constructor(private gameService: GameService) {}
 
   handleSelectLetter(value: string) {
     this.selectLetter.emit(value);
